@@ -13,9 +13,9 @@ Required GitHub Secrets
 
 Things to update:
 
-- [] Build image name (build-deploy.yml line 28)
-- [] Publish image name (build-deploy.yml line 32)
-- [] App name (build-deploy.yml line 37)
+- [ ] Build image name (build-deploy.yml line 28)
+- [ ] Publish image name (build-deploy.yml line 32)
+- [ ] App name (build-deploy.yml line 37)
 
 On any push to master, GitHub actions will build the Docker image, deploy it to Azure Container Registry, tagged with the short commit SHA, and publish that image to your Azure Web App.
 
