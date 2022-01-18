@@ -1,0 +1,39 @@
+name: Build & Deploy Image
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Get Version Number
+        id: version
+        run: echo "::set-output name=version::$(echo ${GITHUB_SHA::7})"
+
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build Image
+        run: |
+          docker build . -t ${{ secrets.REGISTRY_SERVER }}/remix-azure-docker:${{ steps.version.outputs.version }}
+
+      - name: Publish Image
+        run: |
+          docker push ${{ secrets.REGISTRY_SERVER }}/remix-azure-docker:${{ steps.version.outputs.version }}
+
+      - name: Deploy App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "remix-azure-docker"
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: "${{ secrets.REGISTRY_SERVER }}/remix-azure-docker:${{ steps.version.outputs.version }}"
