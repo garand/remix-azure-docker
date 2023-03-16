@@ -2,14 +2,16 @@
 
 This is a template for deploying a Remix app on Azure App Service using Docker with Azure Container Registry.
 
-Required GitHub Secrets
+Required GitHub Secrets 
 
-| Name                         | Sample Value                                                                                                 |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| REGISTRY_SERVER              | yourregistry.azurecr.io                                                                                      |
-| REGISTRY_USERNAME            | yourregistry                                                                                                 |
-| REGISTRY_PASSWORD            | REGISTRY_PASSWORD                                                                                            |
-| AZURE_WEBAPP_PUBLISH_PROFILE | https://docs.microsoft.com/en-us/visualstudio/deployment/tutorial-import-publish-settings-azure?view=vs-2022 |
+| Name                         | Sample Value                                                                                                        |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| REGISTRY_SERVER              | yourregistry.azurecr.io                                                                                             |
+| REGISTRY_USERNAME            | yourregistry                                                                                                        |
+| REGISTRY_PASSWORD            | REGISTRY_PASSWORD                                                                                                   |
+| AZURE_WEBAPP_PUBLISH_PROFILE | https://learn.microsoft.com/en-us/visualstudio/azure/how-to-get-publish-profile-from-azure-app-service?view=vs-2022 |
+
+(Note: These secrets should also be added into the application settings of app services using different key name as:DOCKER_REGISTRY_SERVER_URL, DOCKER_REGISTRY_SERVER_USERNAME & DOCKER_REGISTRY_SERVER_PASSWORD)
 
 Things to update:
 
